@@ -16,11 +16,11 @@
             <h3 style="color: green; margin-left: 5px">Done</h3> {% else %}
             <h3 style="color: red; margin-left: 5px">Not done</h3>{% endif %}
             {% if task.is_done %}
-              <a href="{% url 'todo_app:change_is_done' task.id %}"><input type="button" class="btn btn-secondary"
-                                                                           value="Undo" style="margin-left: 420px"></a>
+              <a href="{% url 'change-is-done' task.id %}"><input type="button" class="btn btn-secondary"
+                                                                  value="Undo" style="margin-left: 420px"></a>
             {% else %}
-              <a href="{% url 'todo_app:change_is_done' task.id %}"><input type="button" class="btn btn-success"
-                                                                           value="Complete" style="margin-left: 340px"></a>
+              <a href="{% url 'change-is-done' task.id %}"><input type="button" class="btn btn-success"
+                                                                  value="Complete" style="margin-left: 340px"></a>
             {% endif %}
           </div>
 
