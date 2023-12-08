@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="row" style="justify-content: space-between">
+      <h1 style="padding-bottom: 20px">TODO list</h1>
+      <a href="{% url 'todo_app:todo-create' %}"><input type="button" class="btn btn-primary" style="margin-top: 7px"
+                                                        value="Add new task"></a>
+    </div>
+  </div>
+  <div class="post-container">
+    {% for task in task_list %}
+      <div class="post">
+        <div class="post-content">
+          <div style="display: flex">
+            <h3>{{ task.content }} </h3> {% if task.is_done %}
+            <h3 style="color: green; margin-left: 5px">Done</h3> {% else %}
+            <h3 style="color: red; margin-left: 5px">Not done</h3>{% endif %}
+            {% if task.is_done %}
+              <a href="{% url 'todo_app:change_is_done' task.id %}"><input type="button" class="btn btn-secondary"
+                                                                           value="Undo" style="margin-left: 420px"></a>
+            {% else %}
+              <a href="{% url 'todo_app:change_is_done' task.id %}"><input type="button" class="btn btn-success"
+                                                                           value="Complete" style="margin-left: 340px"></a>
+            {% endif %}
+          </div>
+
+          <p>{{ task.created_at }} Deadline: {{ task.deadline }}</p>
+          <strong class="post-meta">Tags: {% for tag in task.tags.all %}{{ tag.name }}{% endfor %} <a
+              href="{% url 'todo_app:todo-update' task.id %}">Update</a>
+            <a href="{% url 'todo_app:todo-delete' task.id %}">Delete</a> </strong>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
